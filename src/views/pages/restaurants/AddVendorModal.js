@@ -33,7 +33,7 @@ const AddShopModal = ({ isOpen, setIsOpen }) => {
   return (
     <Modal centered isOpen={isOpen} size="xl">
       <ModalHeader toggle={() => setIsOpen((v) => !v)}>
-        {t("add_shop")}
+        {t("add_vendor")}
       </ModalHeader>
       <Formik
         onSubmit={handleSubmit}
