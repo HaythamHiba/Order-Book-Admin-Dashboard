@@ -27,3 +27,15 @@ export const mapTranslatedProperties = (
   });
   return ret;
 };
+export const getLanguageAttr=(
+  object,lang_id
+)=>{
+  if(!object) return " ";
+
+  if(Object.keys(object).length===0){
+    return " "
+  }
+   return Object.values(object)[lang_id]
+  
+}
+

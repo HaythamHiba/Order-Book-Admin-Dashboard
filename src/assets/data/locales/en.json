@@ -10,7 +10,8 @@
   "save": "Save",
   "all": "All",
   "viewer": "Viewer",
-  "vendor": "Vendor",
+  
+  
   "admin": "Admin",
   "super-admin": "Super Admin",
   "client": "Client",
@@ -319,29 +320,29 @@
   "rate":"Rate",
 
 
-  "all_shops":"All Shops",
-  "shop_categories":"Shop Categories",
-  "add_shop_category":"Add Shop Category",
-  "shop_subCategories":"Shop Sub Categories",
-  "shops": "Shops",
-  "add_shop": "Add Shop",
-  "edit_shop": "Edit Shop",
-  "shop_name": "Shop Name", 
-  "shop_description": "Shop Description",
-  "shop_mobile_description": "Shop Mobile Description",
-  "shop_image": "Shop Image",
+  "all_vendors":"All Vendors",
+  "vendor_categories":"Vendor Categories",
+  "add_vendor_category":"Add Vendor Category",
+  "vendor_subCategories":"Vendor Sub Categories",
+  "vendors": "Vendors",
+  "add_vendor": "Add Vendor",
+  "edit_vendor": "Edit Vendor",
+  "vendor_name": "Vendor Name", 
+  "vendor_description": "Vendor Description",
+  "vendor_mobile_description": "Vendor Mobile Description",
+  "vendor_image": "Vendor Image",
 
-  "shop_category_name":"Shop Category Name",
-  "please_select_shop_first":"Please Select Shop First",
-  "no_shops":"No Shops",
-  "shop_category_image":"Shop Category Image",
-  "shop_category":"Shop Category",
+  "vendor_category_name":"Vendor Category Name",
+  "please_select_vendor_first":"Please Select vendor First",
+  "no_vendors":"No Vendors",
+  "vendor_category_image":"Vendor Category Image",
+  "vendor_category":"Vendor Category",
 
-  "shop_subcategories":"Shop Sub Categories",
-  "shop_subcategory_name":"Shop Sub Category Name",
-  "add_shop_subcategory":"Add Shop Subcategory",
-  "edit_shop_subcategory":"Edit Shop Subcategory",
-  "shop_subcategory":"Shop Subcategory",
+  "vendor_subcategories":"Vendor Sub Categories",
+  "vendor_subcategory_name":"Vendor Sub Category Name",
+  "add_vendor_subcategory":"Add Vendor Subcategory",
+  "edit_vendor_subcategory":"Edit Vendor Subcategory",
+  "vendor_subcategory":"Vendor Subcategory",
   
 
   "auctions":"Auctions",
@@ -373,11 +374,11 @@
 
   "owner_products": "Owner Products",
   "owner_product": "Owner Product",
-  "shops_products": "Shops Products",
-  "shop_product": "Shop Product",
-  "shop": "Shop",
+  "vendors_products": "Vendors Products",
+  "vendor_product": "Vendor Product",
+  "vendor": "Vendor",
   "quantity": "Quantity",
-  "please_select_a_shop": "Please select a shop",
+  "please_select_a_vendor": "Please select a Vendor",
   "edit_product": "Edit Product",
   "customer_address_country": "Country",
   "customer_address_city": "City",
@@ -388,7 +389,7 @@
   "payment_method": "Payment Method",
   "payment_code": "Payment Code",
 
-  "please_select_shop":"Please Select Shop",
+  "please_select_vendor":"Please Select Vendor",
   "type_your_message":"Type Your Message ...",
 
   "order_code": "Order Code",
@@ -401,8 +402,9 @@
   "sub_total": "Sub Total",
   "tax_total": "Tax Total",
   "overall_total": "Overall Total",
+  
 
-  "welcome_message": "Welcome to Elite Auction Admin Dashboard",
+  "welcome_message": "Welcome to Order Book Admin Dashboard",
   "statistics": "Statistics",
   "google_analytics": "Google Analytics",
   "signin_via_google": "Signin via Google",
@@ -445,14 +447,14 @@
     "products_count": "Acivte Products",
     "orders_count": "Orders",
     "categories_count": "Active Categories",
-    "shops_count": "Shops"
+    "vendors_count": "vendors"
   },
 
   "_search": {
     "category": "Search for Category",
     "subcategory": "Search for Sub Category",
     "product": "Search for Product",
-    "shop": "Search for Shop",
+    "vendor": "Search for vendor",
     "team_member": "Search for Team member",
     "order": "Search For Order"
   },

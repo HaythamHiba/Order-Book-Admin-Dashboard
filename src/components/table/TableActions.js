@@ -5,14 +5,13 @@ import { useTranslatedLabels } from "extensions/confirm-alert/useTranslatedLabel
 import { toast } from "react-toastify";
 import { useTranslation } from "utility/language";
 
-import AuthComponent from "components/AuthComponent";
 
 const TableActions = ({ onDelete, onEdit,showEdit=true,showDelete=true, ...props }) => {
   const t = useTranslation();
   const options = useTranslatedLabels();
-
+  
   return (
-    <AuthComponent>
+   
       <div className="data-list-action">
       {
         showEdit&&<Edit onClick={onEdit} className="cursor-pointer mr-1" size={20} />
@@ -35,7 +34,7 @@ const TableActions = ({ onDelete, onEdit,showEdit=true,showDelete=true, ...props
         
         {props.children}
       </div>
-    </AuthComponent>
+    
   );
 };
 

@@ -1,6 +1,7 @@
 import { useQueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { useTranslation } from "utility/language";
+import { addPathVariablesToUrl } from "./addPathVariablesToUrl";
 import { useAxios } from "./useAxios";
 import { validateSession } from "./validateSession";
 
@@ -10,11 +11,9 @@ export const useDeleteMutation = (key, url, object_id, dataName) => {
   const t = useTranslation();
 
   return useMutation(
-    async ({ id }) => {
-      const { data } = await axios.post(url, {
-        [object_id]: id,
-      });
-      return { ...data, id };
+    async (obj) => {
+      const { data } = await axios.post(addPathVariablesToUrl(obj,url));
+      return { ...data };
     },
     {
       onSuccess: ({ message, id }) => {

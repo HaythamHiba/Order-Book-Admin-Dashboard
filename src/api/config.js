@@ -1,3 +1,3 @@
-export const baseURL = `https://api.malnokhba.qa`;
-export const websiteURL = "https://malnokhba.qa/";
+export const baseURL = `http://order-book.chi-team.com/admin`;
+export const ImageURL = `http://order-book.chi-team.com`;
 

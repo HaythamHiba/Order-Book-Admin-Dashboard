@@ -2,8 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Disc, X, Circle } from "react-feather";
 import classnames from "classnames";
-import LOGO from "assets/img/logo/logo_small.png";
-import logo from "assets/img/logo/logo_2.png";
+import LOGO from "assets/img/logo/LOGO.png";
 import { useDirection } from "utility/context/Layout";
 
 const SidebarHeader = ({
@@ -19,9 +18,9 @@ const SidebarHeader = ({
     dir === "ltr" ? { marginRight: "10rem" } : { marginLeft: "10rem" };
 
   return (
-    <div className="navbar-header">
-      <ul className="nav navbar-nav flex-row">
-        <li className="nav-item d-flex w-100">
+    <div style={{  height: collapsed?"70px":"100px" }} className="navbar-header">
+      <ul style={{ justifyContent: "center" }} className="nav navbar-nav flex-row">
+        <li style={{ alignItems: "center" }}  className="nav-item d-flex w-100">
           <NavLink to="/" className="navbar-brand mt-0 w-100">
             {!collapsed ? (
               <div
@@ -32,7 +31,7 @@ const SidebarHeader = ({
                   justifyContent: "center",
                 }}
               >
-                <img width="175" src={logo} alt="" />
+                <img width="120" style={{padding:"10px"}} src={LOGO} alt="" />
               </div>
             ) : (
               <img width="40" style={logoStyles} src={LOGO} alt="" />

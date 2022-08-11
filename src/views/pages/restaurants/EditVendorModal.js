@@ -3,17 +3,17 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Button } from "reactstrap";
 import { useTranslation } from "utility/language";
 import { LoadingButton } from "components/input/LoadingButton";
-import { useUpdateShop } from "api/shops";
-import ShopForm from "./ShopForm";
+import {  useUpdateVendors } from "api/vendors";
 import { Formik, Form } from "formik";
 import { useImagePreview } from "hooks";
-import { baseURL } from "api/config";
+import { ImageURL  } from "api/config";
 
 import {
   getInitialValues,
   getValidationSchema,
   getDataToSend,
 } from "./formUtils";
+import VendorForm from "./VendorForm";
 
 const EditShopModal = ({
   isOpen,
@@ -22,14 +22,14 @@ const EditShopModal = ({
   setObjectToEdit,
 }) => {
   const t = useTranslation();
-  const { mutate: updateShop, isLoading, isSuccess } = useUpdateShop();
+  const { mutate: updateShop, isLoading, isSuccess } = useUpdateVendors(objectToEdit?.id);
 
-  const shop_image = objectToEdit?.shop_image;
+  const logo = objectToEdit?.logo;
   const { preview, handleImageChange, setPreview } =
-    useImagePreview(shop_image);
+    useImagePreview(logo);
 
   const handleSubmit = (values) => {
-    updateShop(getDataToSend({ ...values, shop_id: objectToEdit.id }));
+    updateShop(getDataToSend({ ...values }));
   };
 
   React.useEffect(() => {
@@ -39,14 +39,14 @@ const EditShopModal = ({
   }, [isSuccess, setIsOpen]);
   React.useEffect(() => {
     if (isOpen) {
-      setPreview(`${baseURL}${shop_image}`);
+      setPreview(`${ImageURL}${logo}`);
     }
-  }, [isOpen, setPreview, shop_image]);
+  }, [isOpen, setPreview, logo]);
 
   return (
     <Modal centered isOpen={isOpen} size="xl">
       <ModalHeader toggle={() => setIsOpen((v) => !v)}>
-        {t("edit_shop")}
+        {t("edit_vendor")}
       </ModalHeader>
       {objectToEdit && (
         <Formik
@@ -57,7 +57,7 @@ const EditShopModal = ({
           {(formik) => (
             <Form>
               <ModalBody>
-                <ShopForm
+                <VendorForm
                   editMode={true}
                   preview={preview}
                   handleImageChange={handleImageChange}

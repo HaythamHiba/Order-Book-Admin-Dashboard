@@ -1,60 +1,58 @@
 import React, { useMemo } from "react";
-import { useDeleteShop, useUpdateShopStatus } from "api/shops";
-import { useTranslation } from "utility/language";
+import {  useDeleteVendor,  useUpdateVendorStatus } from "api/vendors";
+import { useBackendLanguageCode, useLanguageCode, useTranslation } from "utility/language";
 import Actions from "components/table/TableActions";
 import { history } from "../../../history";
-import { mapTranslatedProperties } from "helpers/language";
+import { getLanguageAttr } from "helpers/language";
 import { ToggleStatus } from "components/ToggleStatus";
 import HovarableImage from "components/HovarableImage";
-import { baseURL } from "api/config";
+import {  ImageURL } from "api/config";
 
 import { GrView } from "react-icons/gr";
 
 const useTableColumns = (setEditModal, setObjectToEdit) => {
   const t = useTranslation();
-  const deleteMutation = useDeleteShop();
-  const toggleMutation = useUpdateShopStatus();
+  const deleteMutation = useDeleteVendor();
+  const toggleMutation = useUpdateVendorStatus();
+  const langCode=useBackendLanguageCode();
+  const langAtr=useLanguageCode();
 
   return useMemo(
     () => [
+  
       {
-        name: t("sort"),
-        selector: "shop_sort",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: t("image"),
+        name: t("logo"),
         sortable: false,
         center: true,
         cell: (row) => (
           <HovarableImage
-            id={`shop_image_${row.id}`}
-            src={`${baseURL}${row.shop_image}`}
+            id={`vendor_image_${row.id}`}
+            src={`${ImageURL}${row.logo}`}
             width="35"
           />
         ),
       },
       {
-        name: `${t("name")} (${t("en")})`,
+        name: `${t("name")} (${t(langAtr)})`,
         sortable: false,
         center: true,
         cell: (row) =>
-          mapTranslatedProperties(row.shop_details, "shop_name", 1),
+        getLanguageAttr(row.name, langCode),
       },
       {
-        name: `${t("name")} (${t("ar")})`,
+        name: `${t("username")}`,
         sortable: false,
         center: true,
-        cell: (row) =>
-          mapTranslatedProperties(row.shop_details, "shop_name", 2),
+        cell:(row)=><>{row.username}</>
       },
       {
-        name: t("products_count"),
-        selector: "products_count",
-        sortable: true,
+        name: `${t("password")}`,
+        sortable: false,
         center: true,
+        cell:(row)=><>{row.password}</>
       },
+   
+  
       {
         name: t("status"),
         sortable: false,
@@ -71,7 +69,7 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
           <>
             <GrView
               onClick={() => {
-                history.push(`/shop-details/${row.id}`);
+                history.push(`/restaurant-details/${row.id}`);
               }}
               className="cursor-pointer mr-1"
               size={22}
@@ -81,13 +79,15 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
                 setEditModal(true);
                 setObjectToEdit(row);
               }}
-              onDelete={() => deleteMutation.mutate({ id: row.id })}
+              onDelete={() => deleteMutation.mutate({ 
+                vendors:row.id
+               })}
             />
           </>
         ),
       },
     ],
-    [t, deleteMutation, toggleMutation, setEditModal, setObjectToEdit]
+    [t, deleteMutation, toggleMutation, setEditModal, setObjectToEdit,langAtr,langCode]
   );
 };
 

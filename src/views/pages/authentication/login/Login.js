@@ -1,11 +1,10 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, Row, Col } from "reactstrap";
-import LOGO from "assets/img/logo/login.png";
+import LOGO from "assets/img/logo/LOGO.png";
 import "assets/scss/pages/authentication.scss";
 import LoginForm from "./LoginForm";
 import LanguageDropdown from "layouts/components/navbar/LanguageDropdown";
 import { useTranslation } from "utility/language";
-import { websiteURL } from "api/config";
 
 import Copyright from "layouts/components/footer/Copyright";
 
@@ -36,14 +35,9 @@ const Login = () => {
                   alignItems: "center",
                 }}
               >
-                <a
-                  style={{ width: "60%" }}
-                  href={websiteURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img width="100%" src={LOGO} alt="logo" />
-                </a>
+               
+                  <img width="60%" src={LOGO} alt="logo" />
+              
               </div>
             </Col>
             <Col lg="6" md="12" className="p-0 border">

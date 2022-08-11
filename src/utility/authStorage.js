@@ -1,4 +1,4 @@
-const PREFIX = "ELITE_AUCTION_ADMIN";
+const PREFIX = "ORDER_BOOK_ADMIN";
 const TOKEN_KEY = `${PREFIX}_TOKEN`;
 const USER_KEY = `${PREFIX}_USER`;
 

@@ -3,8 +3,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Button } from "reactstrap";
 import { useTranslation } from "utility/language";
 import { LoadingButton } from "components/input/LoadingButton";
-import { useAddShop } from "api/shops";
-import ShopForm from "./ShopForm";
+import {  useAddVendors } from "api/vendors";
 import { Formik, Form } from "formik";
 import { useImagePreview } from "hooks";
 
@@ -13,10 +12,11 @@ import {
   getValidationSchema,
   getDataToSend,
 } from "./formUtils";
+import VendorForm from "./VendorForm";
 
 const AddShopModal = ({ isOpen, setIsOpen }) => {
   const t = useTranslation();
-  const { mutate: addShop, isSuccess, isLoading } = useAddShop();
+  const { mutate: addShop, isSuccess, isLoading } = useAddVendors();
   const { preview, handleImageChange, setPreview } = useImagePreview(null);
 
   const handleSubmit = (values) => {
@@ -43,7 +43,7 @@ const AddShopModal = ({ isOpen, setIsOpen }) => {
         {(formik) => (
           <Form>
             <ModalBody>
-              <ShopForm
+              <VendorForm
                 preview={preview}
                 handleImageChange={handleImageChange}
               />

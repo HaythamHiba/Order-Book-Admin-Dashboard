@@ -5,7 +5,7 @@ import _axios from "axios";
 import { authStorage } from "utility/authStorage";
 
 const API = {
-  LOGIN: `/api/admin/login`,
+  LOGIN: `/login`,
   LOGOUT: `/api/admin/logout`,
 };
 
@@ -20,9 +20,10 @@ export const login = ({ email, password }) => {
     axios
       .post(API.LOGIN, { email, password })
       .then((response) => {
-        const { data } = response.data;
-        if (data && data.token) {
-          const { token, user } = data;
+        const { data,meta } = response.data;
+        if (data && meta.access_token) {
+          const user=data;
+          const token=meta.access_token;
 
           authStorage.store(user, token);
 

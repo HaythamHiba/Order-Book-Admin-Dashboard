@@ -2,8 +2,7 @@ import React from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import { useTranslation } from "utility/language";
-import AuthComponent from "components/AuthComponent";
-import StatusBadge from "components/StatusBadge";
+
 
 export const ToggleStatus = ({ object, toggleMutation, ...props }) => {
   const t = useTranslation();
@@ -16,9 +15,7 @@ export const ToggleStatus = ({ object, toggleMutation, ...props }) => {
   };
 
   return (
-    <AuthComponent
-      notAuthRender={() => <StatusBadge status={object.is_active} />}
-    >
+
       <div className="p-0">
         <p
           className="mb-0 p-0"
@@ -34,6 +31,6 @@ export const ToggleStatus = ({ object, toggleMutation, ...props }) => {
           checked={object.is_active}
         />
       </div>
-    </AuthComponent>
+
   );
 };

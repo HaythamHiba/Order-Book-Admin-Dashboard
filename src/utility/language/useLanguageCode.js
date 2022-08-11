@@ -10,7 +10,7 @@ export const useLanguageCode = () => {
 export const useBackendLanguageCode = () => {
   const { activeLanguage } = useLanguageSelector();
 
-  if (activeLanguage === "en") return 1;
-  if (activeLanguage === "ar-SY") return 2;
+  if (activeLanguage === "en") return 0;
+  if (activeLanguage === "ar-SY") return 1;
   return 3;
 };

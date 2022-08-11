@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-import { useGetSingleShop } from "api/shops";
+import {  useGetSingleVendor } from "api/vendors";
 
 import { Card, CardBody, Spinner } from "reactstrap";
 import CustomCard from "views/components/CustomCard";
@@ -17,7 +17,7 @@ import {
 const PageContent = () => {
   const t = useTranslation();
   const { id } = useParams();
-  const { data, isLoading, isError, isSuccess } = useGetSingleShop(id);
+  const { data, isLoading, isError, isSuccess } = useGetSingleVendor(id);
   const notFound = (isSuccess && data?.shop?.length === 0) ?? false;
   const shop = data?.shop ?? {};
 

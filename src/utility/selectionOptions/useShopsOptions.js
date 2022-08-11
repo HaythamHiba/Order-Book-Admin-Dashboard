@@ -1,12 +1,12 @@
 import React from "react";
 import { useBackendLanguageCode } from "utility/language/useLanguageCode";
 import { mapTranslatedProperties } from "helpers/language";
-import { useGetShops } from "api/shops";
+import {  useGetVendors } from "api/vendors";
 import { useTranslation } from "utility/language";
 
 const useShopsOptions = ({ withAllOption = false } = {}) => {
   const languageCode = useBackendLanguageCode();
-  const { data } = useGetShops();
+  const { data } = useGetVendors();
   const t = useTranslation();
 
   return React.useMemo(() => {

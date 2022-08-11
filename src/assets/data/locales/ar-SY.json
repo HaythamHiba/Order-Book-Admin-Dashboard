@@ -318,13 +318,13 @@
   "default_currency": "العملة الافتراضية",
   "currency": "عملة",
   "rate":"النسبة",
-  "shops": "المتاجر",
-  "add_shop": "إضافة متجر",
-  "edit_shop": "تعديل متجر",
-  "shop_name": "اسم المتجر",
-  "shop_description": "وصف المتجر",
-  "shop_mobile_description": "وصف المتجر الخاص بالموبايل",
-  "shop_image": "صورة المتجر",
+  "vendors": "الوكلاء",
+  "add_vendor": "إضافة وكيل",
+  "edit_vendor": "تعديل وكيل",
+  "vendor_name": "اسم الوكيل",
+  "vendor_description": "وصف الوكيل",
+  "vendor_mobile_description": "وصف الوكيل الخاص بالموبايل",
+  "vendor_image": "صورة الوكيل",
   "test2":"تيست",
 
   "auctions":"المزادات",
@@ -382,32 +382,31 @@
   "showed":"ظاهر",
   "hidden":"مخفي",
   
-  "all_shops":"كل المتاجر",
-  "shop_categories":"الأقسام الرئيسية للمتجر",
-  "add_shop_category":"إضافة فئة رئيسية للمنتح",
-  "shop_subCategories":"الأقسام الفرعية للمتجر",
+  "all_vendors":"كل الوكلاء",
+  "vendor_categories":"الأقسام الرئيسية للوكيل",
+  "add_vendor_category":"إضافة فئة رئيسية للوكيل",
+  "vendor_subCategories":"الأقسام الفرعية للوكيل",
   "owner_products": "منتجات المالك",
   "owner_product": "منتج المالك",
-  "shops_products": "منتجات المتاجر",
-  "shop_product": "منتج المتجر",
-  "shop": "المتجر",
+  "vendors_products": "منتجات الوكلاء",
+  "vendor_product": "منتج الوكيل",
   "quantity": "الكمية",
-  "please_select_a_shop": "الرجاء اختيار متجر",
+  "please_select_a_vendor": "الرجاء اختيار وكيل",
   "edit_product": "تعديل المنتج",
 
-  "please_select_shop":"الرجاء اختيار متجر",
+  "please_select_vendor":"الرجاء اختيار وكيل",
   "type_your_message":"اكتب رسالتك ...",
 
-  "shop_category_name":"اسم القسم الرئيسي للمتجر",
-  "please_select_shop_first":"الرجاء اختيار متجر اولاََ",
-  "no_shops":"لايوجد متاجر",
+  "vendor_category_name":"اسم القسم الرئيسي للوكيل",
+  "please_select_vendor_first":"الرجاء اختيار متجر اولاََ",
+  "no_vendors":"لايوجد وكلاء",
 
-  "shop_subcategories":"الأقسام الفرعية للمتجر",
-  "shop_subcategory_name":"اسم القسم الفرعي التابع للمتجر",
-  "add_shop_subcategory":"إضافة قسم فرعي لمتجر",
-  "edit_shop_subcategory":"تعديل قسم فرقي لمتجر",
-  "shop_category":"القسم الرئيسي للمتجر",
-  "shop_subcategory":"القسم الفرعي للمتجر",
+  "vendor_subcategories":"الأقسام الفرعية للوكيل",
+  "vendor_subcategory_name":"اسم القسم الفرعي التابع للوكيل",
+  "add_vendor_subcategory":"إضافة قسم فرعي لوكيل",
+  "edit_vendor_subcategory":"تعديل قسم فرقي لوكيل",
+  "vendor_category":"القسم الرئيسي للوكيل",
+  "vendor_subcategory":"القسم الفرعي للوكيل",
 
   "order_code": "رمز العرض",
   "customer_name": "اسم الزبون",
@@ -443,14 +442,14 @@
     "products_count": "المنتجات المفعلة",
     "orders_count": "الطلبات",
     "categories_count": "الأقسام الرئيسية المفعلة",
-    "shops_count": "المتاجر"
+    "vendors_count": "المتاجر"
   },
 
   "_search": {
     "category": "ابحث عن قسم رئيسي",
     "subcategory": "ابحث عن قسم فرعي",
     "product": "ابحث عن منتج",
-    "shop": "ابحث عن متجر",
+    "vendor": "ابحث عن وكيل",
     "team_member": "ابحث عن عضو فريق",
     "order": "ابحث عن طلب"
   },
@@ -486,8 +485,8 @@
     "min_number": "الرقم يجب ان يكون بين الواحد والمئة",
     "max_number": "الرقم يجب ان يكون بين الواحد والمئة"
   },
-  "lang_1": "انكليزي",
-  "lang_2": "عربي",
+  "lang_0": "انكليزي",
+  "lang_1": "عربي",
   "_messages": {
     "success": {
       "upload": "تم الرفع ينجاح"

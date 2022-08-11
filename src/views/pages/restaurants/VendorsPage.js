@@ -4,14 +4,14 @@ import { useTranslation } from "utility/language";
 import DataTable from "components/table/DataTable";
 import { Card, CardBody } from "reactstrap";
 import { SearchInput } from "components/input/SearchInput";
-import { useGetShops } from "api/shops";
-import { filterShopsBasedOnSearch } from "./filters";
+import {  useGetVendors } from "api/vendors";
+import { filterVendorsBasedOnSearch } from "./filters";
 import { AddButton } from "components/AddButton";
-import AddShopModal from "./AddShopModal";
-import EditshopModal from "./EditShopModal";
+import AddShopModal from "./AddVendorModal";
+import EditshopModal from "./EditVendorModal";
 import { useIsAuthorized } from "redux/hooks/auth";
 
-const ShopsPage = () => {
+const VendorsPage = () => {
   const t = useTranslation();
   const isAuthorized = useIsAuthorized();
 
@@ -21,8 +21,8 @@ const ShopsPage = () => {
   const [objectToEdit, setObjectToEdit] = React.useState(null);
 
   //Table Content -- Data + Columns
-  const { data, isLoading } = useGetShops();
-  const shops = data?.shops || [];
+  const { data, isLoading } = useGetVendors();
+  const vendors = data || [];
   const columns = useTableColumns(setEditModal, setObjectToEdit);
 
   //Data Filters
@@ -30,29 +30,29 @@ const ShopsPage = () => {
   const [filteredData, setFilteredData] = React.useState([]);
 
   React.useEffect(() => {
-    if (Array.isArray(data?.shops)) {
+    if (Array.isArray(data)) {
       if (searchText) {
-        setFilteredData(filterShopsBasedOnSearch(data.shops, searchText));
+        setFilteredData(filterVendorsBasedOnSearch(data, searchText));
       } else {
-        setFilteredData(data.shops);
+        setFilteredData(data);
       }
     }
   }, [searchText, data]);
 
   return (
     <>
-      <h1>{t("shops")}</h1>
+      <h1>{t("vendors")}</h1>
       <div className="d-flex align-items-center mb-1 justify-content-between">
         <div className="d-flex">
           {isAuthorized && <AddButton onClick={() => setAddModal(true)} />}
         </div>
-        <SearchInput onChange={setSearchText} placeholder={t("_search.shop")} />
+        <SearchInput onChange={setSearchText} placeholder={t("_search.vendor")} />
       </div>
       <Card>
         <CardBody className="p-1">
           <DataTable
             columns={columns}
-            data={searchText ? filteredData : shops}
+            data={searchText ? filteredData : vendors}
             progressPending={isLoading}
             noHeader
             pagination
@@ -70,4 +70,4 @@ const ShopsPage = () => {
   );
 };
 
-export default ShopsPage;
+export default VendorsPage;

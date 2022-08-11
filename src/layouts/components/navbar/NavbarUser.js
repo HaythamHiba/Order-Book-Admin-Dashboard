@@ -44,12 +44,7 @@ const UserDropdown = (props) => {
   );
 };
 
-const RoleRenderer = (props) => {
-  const { user } = useAuth();
-  const t = useTranslation();
 
-  return t(user?.role_type);
-};
 
 class NavbarUser extends React.PureComponent {
   render() {
@@ -63,9 +58,7 @@ class NavbarUser extends React.PureComponent {
               <span className="user-name text-bold-600">
                 {this.props.userName}
               </span>
-              <span className="user-status">
-                <RoleRenderer />
-              </span>
+          
             </div>
             <span data-tour="user">
               <img

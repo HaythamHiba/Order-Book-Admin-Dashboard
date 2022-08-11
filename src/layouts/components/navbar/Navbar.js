@@ -8,7 +8,8 @@ import NavbarUser from "./NavbarUser";
 import userImg from "assets/img/portrait/small/avatar-s-11.jpg";
 
 const UserName = (props) => {
-  return props.user?.full_name || "User";
+
+  return props?.user?.name || "User" ;
 };
 
 const ThemeNavbar = (props) => {
