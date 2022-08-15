@@ -20,7 +20,7 @@ export default function Reviews({
   reviewsMutation,
 
 }) {
-  const { id,shop_id } = useParams();
+  const { id } = useParams();
   //pagination
   const { page, per_page, handlePerPageChange, handlePageChange } = usePagination();
   //filter
@@ -29,7 +29,7 @@ export default function Reviews({
   //data
   const { isLoading, data } = reviewsQuery({
     product_id: id,
-    shop_id:shop_id,
+  
     page: page,
     per_page: per_page,
     review_status: selectedStatus

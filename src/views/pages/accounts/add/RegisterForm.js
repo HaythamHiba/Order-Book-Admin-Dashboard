@@ -14,7 +14,7 @@ import * as Yup from "yup";
 import "./index.css";
 import PropTypes from "prop-types";
 import { LoadingButton } from "components/input/LoadingButton";
-import useShopsOptions from "utility/selectionOptions/useShopsOptions";
+import useShopsOptions from "utility/selectionOptions/useVendorsOptions";
 import { getDataToSend } from "api/accounts";
 import { SelectField } from "components/input";
 

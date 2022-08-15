@@ -13,6 +13,7 @@
   
   
   "admin": "Admin",
+  "admin_note":"Admin Note",
   "super-admin": "Super Admin",
   "client": "Client",
   "full_name": "Full Name",
@@ -328,6 +329,7 @@
   "add_vendor": "Add Vendor",
   "edit_vendor": "Edit Vendor",
   "vendor_name": "Vendor Name", 
+  "vendor_items":"Vendor Items",
   "vendor_description": "Vendor Description",
   "vendor_mobile_description": "Vendor Mobile Description",
   "vendor_image": "Vendor Image",
@@ -379,6 +381,7 @@
   "vendor": "Vendor",
   "quantity": "Quantity",
   "please_select_a_vendor": "Please select a Vendor",
+  "please_select_a_category": "Please select a Category",
   "edit_product": "Edit Product",
   "customer_address_country": "Country",
   "customer_address_city": "City",
@@ -456,7 +459,8 @@
     "product": "Search for Product",
     "vendor": "Search for vendor",
     "team_member": "Search for Team member",
-    "order": "Search For Order"
+    "order": "Search For Order",
+    "item":"Search For Item"
   },
   "new": {
     "password": "New Password",

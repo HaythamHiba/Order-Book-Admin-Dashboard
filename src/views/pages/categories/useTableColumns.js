@@ -1,26 +1,18 @@
 import React, { useMemo } from "react";
-import { useDeleteCategory, useUpdateCategoryStatus } from "api/categories";
 import { useTranslation } from "utility/language";
 import Actions from "components/table/TableActions";
 // import { history } from "../../../history";
-import { mapTranslatedProperties } from "helpers/language";
-import { ToggleStatus } from "components/ToggleStatus";
+import { getLanguageAttr } from "helpers/language";
 import HovarableImage from "components/HovarableImage";
-import { baseURL } from "api/config";
+import {  ImageURL } from "api/config";
+import { Badge } from "reactstrap";
 
 const useTableColumns = (setEditModal, setObjectToEdit) => {
   const t = useTranslation();
-  const deleteMutation = useDeleteCategory();
-  const toggleMutation = useUpdateCategoryStatus();
 
   return useMemo(
     () => [
-      {
-        name: t("sort"),
-        selector: "category_sort",
-        sortable: true,
-        center: true,
-      },
+     
       {
         name: t("image"),
         sortable: false,
@@ -28,7 +20,7 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
         cell: (row) => (
           <HovarableImage
             id={`category_image_${row.id}`}
-            src={`${baseURL}${row.category_image}`}
+            src={`${ImageURL}${row.image}`}
             width="35"
           />
         ),
@@ -38,29 +30,25 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
         sortable: false,
         center: true,
         cell: (row) =>
-          mapTranslatedProperties(row.category_details, "category_name", 1),
+          getLanguageAttr(row.name, 0),
       },
       {
         name: `${t("name")} (${t("ar")})`,
         sortable: false,
         center: true,
         cell: (row) =>
-          mapTranslatedProperties(row.category_details, "category_name", 2),
+        getLanguageAttr(row.name, 1),
       },
       {
-        name: t("subcategories_count"),
-        selector: "subcategories_count",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: t("status"),
+        name:`${t("status")}`,
         sortable: false,
         center: true,
-        cell: (row) => (
-          <ToggleStatus object={row} toggleMutation={toggleMutation} />
-        ),
+        cell: (row) =><Badge color={row.status?"success":"danger"}>
+        {row.status?t("shown"):t("hidden")}
+        </Badge>
       },
+    
+     
       {
         name: "#",
         sortable: false,
@@ -71,12 +59,12 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
               setEditModal(true);
               setObjectToEdit(row);
             }}
-            onDelete={() => deleteMutation.mutate({ id: row.id })}
+            showDelete={false}
           />
         ),
       },
     ],
-    [t, deleteMutation, toggleMutation, setEditModal, setObjectToEdit]
+    [t, setEditModal, setObjectToEdit]
   );
 };
 

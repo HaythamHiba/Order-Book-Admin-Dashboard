@@ -1,19 +1,19 @@
 import React, { useMemo } from "react";
-import {  useDeleteVendor,  useUpdateVendorStatus } from "api/vendors";
+import {  useDeleteVendor } from "api/vendors";
 import { useBackendLanguageCode, useLanguageCode, useTranslation } from "utility/language";
 import Actions from "components/table/TableActions";
 import { history } from "../../../history";
 import { getLanguageAttr } from "helpers/language";
-import { ToggleStatus } from "components/ToggleStatus";
 import HovarableImage from "components/HovarableImage";
 import {  ImageURL } from "api/config";
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
+import { Badge } from "reactstrap";
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
-import { GrView } from "react-icons/gr";
 
-const useTableColumns = (setEditModal, setObjectToEdit) => {
+const useTableColumns = (setEditModal, setObjectToEdit,setStatusModal) => {
   const t = useTranslation();
   const deleteMutation = useDeleteVendor();
-  const toggleMutation = useUpdateVendorStatus();
   const langCode=useBackendLanguageCode();
   const langAtr=useLanguageCode();
 
@@ -54,22 +54,33 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
    
   
       {
-        name: t("status"),
+        name:`${t("status")}`,
         sortable: false,
         center: true,
-        cell: (row) => (
-          <ToggleStatus object={row} toggleMutation={toggleMutation} />
-        ),
+        cell: (row) =><Badge color={row.status?"success":"danger"}>
+        {row.status?t("shown"):t("hidden")}
+        </Badge>
       },
+    
       {
         name: "#",
         sortable: false,
         center: true,
         cell: (row) => (
           <>
-            <GrView
+            <PublishedWithChangesIcon
               onClick={() => {
-                history.push(`/restaurant-details/${row.id}`);
+                setStatusModal(true);
+                setObjectToEdit(row);
+              }}
+              className="cursor-pointer mr-1"
+              size={22}
+            
+            />
+            
+            <CropOriginalIcon
+              onClick={() => {
+                history.push(`/vendor/${row.id}/images`);
               }}
               className="cursor-pointer mr-1"
               size={22}
@@ -87,7 +98,7 @@ const useTableColumns = (setEditModal, setObjectToEdit) => {
         ),
       },
     ],
-    [t, deleteMutation, toggleMutation, setEditModal, setObjectToEdit,langAtr,langCode]
+    [t, deleteMutation, setEditModal, setObjectToEdit,langAtr,langCode,setStatusModal]
   );
 };
 

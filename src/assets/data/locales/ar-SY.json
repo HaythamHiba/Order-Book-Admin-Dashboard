@@ -12,6 +12,7 @@
   "viewer": "مشاهد",
   "vendor": "وكيل",
   "admin": "أدمن",
+  "admin_note":"ملاحظة المشرف",
   "super-admin": "سوبر أدمن",
   "client": "زبون",
   "full_name": "الاسم",
@@ -322,6 +323,7 @@
   "add_vendor": "إضافة وكيل",
   "edit_vendor": "تعديل وكيل",
   "vendor_name": "اسم الوكيل",
+  "vendor_items":"عناصر الوكير",
   "vendor_description": "وصف الوكيل",
   "vendor_mobile_description": "وصف الوكيل الخاص بالموبايل",
   "vendor_image": "صورة الوكيل",
@@ -392,6 +394,7 @@
   "vendor_product": "منتج الوكيل",
   "quantity": "الكمية",
   "please_select_a_vendor": "الرجاء اختيار وكيل",
+  "please_select_a_category": "الرجاء اختيار فئة رئيسية",
   "edit_product": "تعديل المنتج",
 
   "please_select_vendor":"الرجاء اختيار وكيل",
@@ -451,7 +454,8 @@
     "product": "ابحث عن منتج",
     "vendor": "ابحث عن وكيل",
     "team_member": "ابحث عن عضو فريق",
-    "order": "ابحث عن طلب"
+    "order": "ابحث عن طلب",
+    "items":"البحث عن عنصر"
   },
   "new": {
     "password": "كلمة المرور الجديدة",

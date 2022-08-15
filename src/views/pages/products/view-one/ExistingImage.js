@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardImg, CardBody } from "reactstrap";
 import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { baseURL } from "api/config";
+import { ImageURL } from "api/config";
 import { useIsAuthorized } from "redux/hooks/auth";
 
 export const ExistingImage = ({ image, deletedImages = [], onDelete }) => {
@@ -22,7 +22,7 @@ export const ExistingImage = ({ image, deletedImages = [], onDelete }) => {
     >
       <CardImg
         alt="slider"
-        src={`${baseURL}${image.image_name}`}
+        src={`${ImageURL}${image.image_name}`}
         top
         style={{
           height: "200px",

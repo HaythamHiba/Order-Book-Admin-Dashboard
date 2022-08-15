@@ -1,70 +1,52 @@
 import * as Yup from "yup";
-import { mapTranslatedProperties } from "helpers/language";
-import { buildFormData } from "api/helpers";
+import { getLanguageAttr } from "helpers/language";
 
 export const getInitialValues = (objectToEdit = null) => {
   if (!objectToEdit) {
     return {
-      translated_fields: {
-        1: {
-          category_name: "",
-        },
-        2: {
-          category_name: "",
-        },
+      name: {
+        ar:"",
+        en:""
       },
-      category_image: "",
-      category_sort: 1,
+      image:"",
+      status:"",
+      admin_note:"",
+      
     };
   }
 
   return {
-    translated_fields: {
-      1: {
-        category_name:
-          mapTranslatedProperties(
-            objectToEdit?.category_details,
-            "category_name",
-            1
-          ) || "",
-      },
-      2: {
-        category_name:
-          mapTranslatedProperties(
-            objectToEdit?.category_details,
-            "category_name",
-            2
-          ) || "",
-      },
+    name: {
+      ar:getLanguageAttr(objectToEdit.name,1) || "",
+      en:getLanguageAttr(objectToEdit.name,0)|| ""
     },
-    category_image: "",
-    category_sort: objectToEdit.category_sort ?? 1,
+    image: "",
+    status:objectToEdit?.status||"",
+    admin_note:objectToEdit?.admin_note|| ""
+
   };
 };
 
 export const getValidationSchema = (editMode = false) => {
   return Yup.object().shape({
-    translated_fields: Yup.object({
-      1: Yup.object({
-        category_name: Yup.string().required("required"),
-      }),
-      2: Yup.object({
-        category_name: Yup.string().required("required"),
-      }),
+    name: Yup.object({
+      ar:Yup.string().required("required"),
+      en:Yup.string().required("required")
     }),
 
     ...(!editMode && {
-      category_image: Yup.mixed().required("required"),
+      image: Yup.mixed().required("required"),
     }),
   });
 };
 
 export const getDataToSend = (values) => {
   const data = { ...values };
-  if (values.category_image === "") {
-    delete data["category_image"];
-  }
-  const formData = new FormData();
-  buildFormData(formData, data);
-  return formData;
+    delete data["image"];
+    delete data["name"];
+    if(values.status){
+      delete data["admin_note"]
+    }
+    return data;
+
 };

@@ -5,7 +5,7 @@ import { useTranslation } from "utility/language";
 import { LoadingButton } from "components/input/LoadingButton";
 import CategoryForm from "./ShopCategoryForm";
 import { Formik, Form } from "formik";
-import useShopsOptions from "utility/selectionOptions/useShopsOptions";
+import useShopsOptions from "utility/selectionOptions/useVendorsOptions";
 
 
 

@@ -1,73 +1,52 @@
 import * as Yup from "yup";
-import { mapTranslatedProperties } from "helpers/language";
-import { buildFormData } from "api/helpers";
+import { getLanguageAttr } from "helpers/language";
 
 export const getInitialValues = (objectToEdit = null) => {
   if (!objectToEdit) {
     return {
-      translated_fields: {
-        1: {
-          subcategory_name: "",
-        },
-        2: {
-          subcategory_name: "",
-        },
+      name: {
+        ar:"",
+        en:""
       },
-      subcategory_image: "",
-      category_id: "",
-      subcategory_sort: 1,
+      image:"",
+      status:"",
+      admin_note:"",
+      
     };
   }
 
   return {
-    translated_fields: {
-      1: {
-        subcategory_name:
-          mapTranslatedProperties(
-            objectToEdit?.subcategory_details,
-            "subcategory_name",
-            1
-          ) || "",
-      },
-      2: {
-        subcategory_name:
-          mapTranslatedProperties(
-            objectToEdit?.subcategory_details,
-            "subcategory_name",
-            2
-          ) || "",
-      },
+    name: {
+      ar:getLanguageAttr(objectToEdit.name,1) || "",
+      en:getLanguageAttr(objectToEdit.name,0)|| ""
     },
-    subcategory_image: "",
-    category_id: objectToEdit.category_id ?? "",
-    subcategory_sort: objectToEdit.subcategory_sort ?? 1,
+    image: "",
+    status:objectToEdit?.status||"",
+    admin_note:objectToEdit?.admin_note|| ""
+
   };
 };
 
 export const getValidationSchema = (editMode = false) => {
   return Yup.object().shape({
-    translated_fields: Yup.object({
-      1: Yup.object({
-        subcategory_name: Yup.string().required("required"),
-      }),
-      2: Yup.object({
-        subcategory_name: Yup.string().required("required"),
-      }),
+    name: Yup.object({
+      ar:Yup.string().required("required"),
+      en:Yup.string().required("required")
     }),
-    category_id: Yup.number().required("required"),
 
     ...(!editMode && {
-      subcategory_image: Yup.mixed().required("required"),
+      image: Yup.mixed().required("required"),
     }),
   });
 };
 
 export const getDataToSend = (values) => {
   const data = { ...values };
-  if (values.subcategory_image === "") {
-    delete data["subcategory_image"];
-  }
-  const formData = new FormData();
-  buildFormData(formData, data);
-  return formData;
+    delete data["image"];
+    delete data["name"];
+    if(values.status){
+      delete data["admin_note"]
+    }
+    return data;
+
 };

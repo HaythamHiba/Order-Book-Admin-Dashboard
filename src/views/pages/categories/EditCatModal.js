@@ -7,7 +7,7 @@ import { useUpdateCategory } from "api/categories";
 import CategoryForm from "./CategoryForm";
 import { Formik, Form } from "formik";
 import { useImagePreview } from "hooks";
-import { baseURL } from "api/config";
+import {  ImageURL } from "api/config";
 
 import {
   getInitialValues,
@@ -17,14 +17,18 @@ import {
 
 const EditCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) => {
   const t = useTranslation();
-  const { mutate: updateCategory, isLoading, isSuccess } = useUpdateCategory();
+  const { mutate: updateCategory, isLoading, isSuccess } = useUpdateCategory(objectToEdit?.vendor_id,objectToEdit?.id);
 
-  const category_image = objectToEdit?.category_image;
-  const { preview, handleImageChange, setPreview } =
+  const category_image = objectToEdit?.image;
+  const { preview, setPreview } =
     useImagePreview(category_image);
 
   const handleSubmit = (values) => {
-    updateCategory(getDataToSend({ ...values, category_id: objectToEdit.id }));
+    updateCategory(
+      
+      getDataToSend({ ...values}),
+      
+      );
   };
 
   React.useEffect(() => {
@@ -34,7 +38,7 @@ const EditCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) => {
   }, [isSuccess, setIsOpen]);
   React.useEffect(() => {
     if (isOpen) {
-      setPreview(`${baseURL}${category_image}`);
+      setPreview(`${ImageURL}${category_image}`);
     }
   }, [isOpen, setPreview, category_image]);
 
@@ -55,7 +59,6 @@ const EditCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) => {
                 <CategoryForm
                   editMode={true}
                   preview={preview}
-                  handleImageChange={handleImageChange}
                 />
               </ModalBody>
               <ModalFooter>

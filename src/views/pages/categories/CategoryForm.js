@@ -4,8 +4,10 @@ import { useTranslation } from "utility/language";
 import { useFormikContext } from "formik";
 import ImagePreview from "components/ImagePreview";
 import { Row, Col } from "reactstrap";
+import { Check } from "react-feather";
+import Checkbox from "components/@vuexy/checkbox/CheckboxesVuexy";
 
-const CategoryForm = ({ preview, handleImageChange, editMode = false }) => {
+const CategoryForm = ({ preview, editMode = false }) => {
   const t = useTranslation();
   const formik = useFormikContext();
 
@@ -14,34 +16,58 @@ const CategoryForm = ({ preview, handleImageChange, editMode = false }) => {
       <Col>
         <ValidatedField
           dir="ltr"
-          name="translated_fields[1][category_name]"
+          name="name[en]"
           label={`${t("category_name")} (${t("en")})`}
           placeholder={`${t("category_name")} (${t("en")})`}
+          readOnly
         />
         <ValidatedField
           dir="rtl"
-          name="translated_fields[2][category_name]"
+          name="name[ar]"
           label={`${t("category_name")} (${t("ar")})`}
           placeholder={`${t("category_name")} (${t("ar")})`}
+          readOnly
+
         />
+                
+        
         <ValidatedField
-          name="category_sort"
-          label={t("sort")}
-          placeholder={t("sort")}
-          type="number"
+          dir="rtl"
+          name="name[ar]"
+          label={`${t("category_name")} (${t("ar")})`}
+          placeholder={`${t("category_name")} (${t("ar")})`}
+          readOnly
+
         />
+         <Checkbox
+            color="primary"
+            icon={<Check className="vx-icon" size={16} />}
+            label={t("active")}
+            checked={formik.values.status}
+            onChange={() =>
+              formik.setFieldValue("status", !formik.values.status)
+            }
+          />
+          {
+            !formik.values.status&& <ValidatedField
+            dir="rtl"
+            name="admin_note"
+            label={`${t("admin_note")}`}
+            placeholder={`${t("admin_note")}`}
+            as="textarea"
+          />
+          }
+        
+   
       </Col>
       <Col>
         <ValidatedField
-          id="category_image"
+          id="image"
           type="file"
           label={t("category_image")}
-          name="category_image"
+          name="image"
           accept="image/*"
-          onChange={(e) => {
-            handleImageChange(e);
-            formik.setFieldValue("category_image", e.target.files[0]);
-          }}
+          readOnly
         />
         <ImagePreview preview={preview} />
       </Col>

@@ -3,7 +3,8 @@ import { Card, CardHeader, CardTitle, CardBody, Button } from "reactstrap";
 import { useTranslation } from "utility/language";
 import { Formik, Form } from "formik";
 import Tabs from "components/Tabs";
-import { getInitialValues, getValidationSchema } from "./utils/formSchema";
+import { getDataToSend, getInitialValues, getValidationSchema } from "./utils/formSchema";
+import { history } from "../../../../history";
 
 import { buildFormData } from "api/helpers";
 import { LoadingButton } from "components/input/LoadingButton";
@@ -11,47 +12,49 @@ import { LoadingButton } from "components/input/LoadingButton";
 import useFormTabs from "./utils/useFormTabs";
 
 import PropTypes from "prop-types";
-import useProductType from "./useProductType";
 
-import ProgressBar from "components/ProgressBar";
 
-import { navigateToAllProducts } from "./utils/nav";
-import AuthComponent from "components/AuthComponent";
+const navigateToAllProducts = () => {
+ 
 
-const AddProductPage = ({ mutation, initialValues = {} }) => {
+    history.push(`/items/view-all`);
+  
+};
+
+const AddItemPage = ({ mutation }) => {
   const t = useTranslation();
   const {
-    mutate: addProduct,
+    mutate: addItem,
     isLoading,
     isSuccess,
-    isError,
-    percentCompleted,
   } = mutation;
-  const productType = useProductType();
 
   React.useEffect(() => {
     if (isSuccess) {
-      navigateToAllProducts(productType);
+      navigateToAllProducts();
     }
-  }, [isSuccess, productType]);
+  }, [isSuccess]);
 
   const tabs = useFormTabs();
 
   const handleSubmit = (values) => {
+    const data={...values}
+   const new_data= getDataToSend(data)
     const formData = new FormData();
-    buildFormData(formData, values);
-    addProduct(formData);
+    buildFormData(formData, new_data);
+    addItem( formData);
   };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>
-          {t("add_product")} ({t(productType)})
+          {t("add_item")} 
         </CardTitle>
         <Button
           color="primary"
-          onClick={() => navigateToAllProducts(productType)}
+          onClick={() => navigateToAllProducts()}
+          disabled={isLoading}
         >
           {t("back")}
         </Button>
@@ -59,30 +62,23 @@ const AddProductPage = ({ mutation, initialValues = {} }) => {
       <CardBody>
         <Formik
           onSubmit={handleSubmit}
-          initialValues={{ ...getInitialValues(productType), ...initialValues }}
-          validationSchema={getValidationSchema(productType)}
+          initialValues={getInitialValues()}
+          validationSchema={getValidationSchema()}
         >
           {(formik) => (
             <Form>
               <Tabs tabs={tabs} />
 
-              <AuthComponent>
-                <ProgressBar
-                  value={percentCompleted}
+           
+              <div className="d-flex justify-content-center align-items-center">
+                <LoadingButton
+                  type="submit"
+                  color="primary"
                   isLoading={isLoading}
-                  isError={isError}
-                  isSuccess={isSuccess}
-                />
-                <div className="d-flex justify-content-center align-items-center">
-                  <LoadingButton
-                    type="submit"
-                    color="primary"
-                    isLoading={isLoading}
-                  >
-                    {t("add")}
-                  </LoadingButton>
-                </div>
-              </AuthComponent>
+                >
+                  {t("add")}
+                </LoadingButton>
+              </div>
             </Form>
           )}
         </Formik>
@@ -91,8 +87,8 @@ const AddProductPage = ({ mutation, initialValues = {} }) => {
   );
 };
 
-AddProductPage.propTypes = {
+AddItemPage.propTypes = {
   mutation: PropTypes.object.isRequired,
 };
 
-export default AddProductPage;
+export default AddItemPage;

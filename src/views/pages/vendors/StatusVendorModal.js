@@ -3,32 +3,30 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Button } from "reactstrap";
 import { useTranslation } from "utility/language";
 import { LoadingButton } from "components/input/LoadingButton";
-import SubCategoryForm from "./SubCategoryForm";
+import {  useUpdateVendorStatus } from "api/vendors";
 import { Formik, Form } from "formik";
-import { useImagePreview } from "hooks";
-import {  ImageURL } from "api/config";
+
 
 import {
-  getInitialValues,
-  getValidationSchema,
-  getDataToSend,
+  
+  
+  
+  getStatusInitialValues,
 } from "./formUtils";
-import { useUpdateSubCategory } from "api/subcategories";
+import StatusForm from "./StatusForm";
 
-const EditSubCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) => {
+const StatusVendorModal = ({
+  isOpen,
+  setIsOpen,
+  objectToEdit,
+  setObjectToEdit,
+}) => {
   const t = useTranslation();
-  const { mutate: updateCategory, isLoading, isSuccess } = useUpdateSubCategory(objectToEdit?.vendor_id,objectToEdit?.id);
+  const { mutate: updateShopStatus, isLoading, isSuccess } = useUpdateVendorStatus(objectToEdit?.id);
 
-  const category_image = objectToEdit?.image;
-  const { preview, setPreview } =
-    useImagePreview(category_image);
 
   const handleSubmit = (values) => {
-    updateCategory(
-      
-      getDataToSend({ ...values}),
-      
-      );
+    updateShopStatus(values);
   };
 
   React.useEffect(() => {
@@ -36,29 +34,25 @@ const EditSubCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) =
       setIsOpen(false);
     }
   }, [isSuccess, setIsOpen]);
-  React.useEffect(() => {
-    if (isOpen) {
-      setPreview(`${ImageURL}${category_image}`);
-    }
-  }, [isOpen, setPreview, category_image]);
+
 
   return (
-    <Modal centered isOpen={isOpen} size="lg">
+    <Modal centered isOpen={isOpen} size="md">
       <ModalHeader toggle={() => setIsOpen((v) => !v)}>
-        {t("edit_category")}
+        {t("edit_vendor")}
       </ModalHeader>
       {objectToEdit && (
         <Formik
           onSubmit={handleSubmit}
-          initialValues={getInitialValues(objectToEdit)}
-          validationSchema={getValidationSchema(true)}
+          initialValues={getStatusInitialValues(objectToEdit)}
+    
         >
           {(formik) => (
             <Form>
               <ModalBody>
-                <SubCategoryForm
+                <StatusForm
                   editMode={true}
-                  preview={preview}
+
                 />
               </ModalBody>
               <ModalFooter>
@@ -85,4 +79,4 @@ const EditSubCatModal = ({ isOpen, setIsOpen, objectToEdit, setObjectToEdit }) =
   );
 };
 
-export default EditSubCatModal;
+export default StatusVendorModal;

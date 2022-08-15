@@ -10,6 +10,7 @@ import { AddButton } from "components/AddButton";
 import AddShopModal from "./AddVendorModal";
 import EditshopModal from "./EditVendorModal";
 import { useIsAuthorized } from "redux/hooks/auth";
+import StatusVendorModal from "./StatusVendorModal";
 
 const VendorsPage = () => {
   const t = useTranslation();
@@ -18,12 +19,13 @@ const VendorsPage = () => {
   //Data Manipulation -- Add + Edit
   const [addModal, setAddModal] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
+  const [statusModal,setStatusModal]=React.useState(false)
   const [objectToEdit, setObjectToEdit] = React.useState(null);
 
   //Table Content -- Data + Columns
   const { data, isLoading } = useGetVendors();
   const vendors = data || [];
-  const columns = useTableColumns(setEditModal, setObjectToEdit);
+  const columns = useTableColumns(setEditModal, setObjectToEdit,setStatusModal);
 
   //Data Filters
   const [searchText, setSearchText] = React.useState("");
@@ -63,6 +65,12 @@ const VendorsPage = () => {
       <EditshopModal
         isOpen={editModal}
         setIsOpen={setEditModal}
+        objectToEdit={objectToEdit}
+        setObjectToEdit={setObjectToEdit}
+      />
+       <StatusVendorModal
+        isOpen={statusModal}
+        setIsOpen={setStatusModal}
         objectToEdit={objectToEdit}
         setObjectToEdit={setObjectToEdit}
       />

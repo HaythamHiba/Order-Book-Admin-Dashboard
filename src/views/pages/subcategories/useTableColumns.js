@@ -1,38 +1,26 @@
 import React, { useMemo } from "react";
-import {
-  useDeleteSubCategory,
-  useUpdateSubCategoryStatus,
-} from "api/subcategories";
-import { useBackendLanguageCode, useTranslation } from "utility/language";
+import { useTranslation } from "utility/language";
 import Actions from "components/table/TableActions";
 // import { history } from "../../../history";
-import { mapTranslatedProperties } from "helpers/language";
-import { ToggleStatus } from "components/ToggleStatus";
+import { getLanguageAttr } from "helpers/language";
 import HovarableImage from "components/HovarableImage";
-import { baseURL } from "api/config";
+import {  ImageURL } from "api/config";
+import { Badge } from "reactstrap";
 
-const useTableColumns = (categories, setEditModal, setObjectToEdit) => {
+const useTableColumns = (setEditModal, setObjectToEdit) => {
   const t = useTranslation();
-  const deleteMutation = useDeleteSubCategory();
-  const toggleMutation = useUpdateSubCategoryStatus();
-  const languageCode = useBackendLanguageCode();
 
   return useMemo(
     () => [
-      {
-        name: t("sort"),
-        selector: "subcategory_sort",
-        sortable: true,
-        center: true,
-      },
+     
       {
         name: t("image"),
         sortable: false,
         center: true,
         cell: (row) => (
           <HovarableImage
-            id={`subcategory_image_${row.id}`}
-            src={`${baseURL}${row.subcategory_image}`}
+            id={`category_image_${row.id}`}
+            src={`${ImageURL}${row.image}`}
             width="35"
           />
         ),
@@ -42,52 +30,25 @@ const useTableColumns = (categories, setEditModal, setObjectToEdit) => {
         sortable: false,
         center: true,
         cell: (row) =>
-          mapTranslatedProperties(
-            row.subcategory_details,
-            "subcategory_name",
-            1
-          ),
+          getLanguageAttr(row.name, 0),
       },
       {
         name: `${t("name")} (${t("ar")})`,
         sortable: false,
         center: true,
         cell: (row) =>
-          mapTranslatedProperties(
-            row.subcategory_details,
-            "subcategory_name",
-            2
-          ),
+        getLanguageAttr(row.name, 1),
       },
       {
-        name: t("category"),
+        name:`${t("status")}`,
         sortable: false,
         center: true,
-        cell: (row) => {
-          const category =
-            categories?.find((item) => item.id === row.category_id) || {};
-          if (!category.category_details) return "";
-          return mapTranslatedProperties(
-            category.category_details,
-            "category_name",
-            languageCode
-          );
-        },
+        cell: (row) =><Badge color={row.status?"success":"danger"}>
+        {row.status?t("shown"):t("hidden")}
+        </Badge>
       },
-      {
-        name: t("products_count"),
-        selector: "products_count",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: t("status"),
-        sortable: false,
-        center: true,
-        cell: (row) => (
-          <ToggleStatus object={row} toggleMutation={toggleMutation} />
-        ),
-      },
+    
+     
       {
         name: "#",
         sortable: false,
@@ -98,20 +59,12 @@ const useTableColumns = (categories, setEditModal, setObjectToEdit) => {
               setEditModal(true);
               setObjectToEdit(row);
             }}
-            onDelete={() => deleteMutation.mutate({ id: row.id })}
+            showDelete={false}
           />
         ),
       },
     ],
-    [
-      t,
-      categories,
-      deleteMutation,
-      toggleMutation,
-      setEditModal,
-      setObjectToEdit,
-      languageCode,
-    ]
+    [t, setEditModal, setObjectToEdit]
   );
 };
 

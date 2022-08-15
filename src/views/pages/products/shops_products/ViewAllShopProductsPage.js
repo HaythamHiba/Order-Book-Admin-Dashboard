@@ -4,36 +4,36 @@ import { useTranslation } from "utility/language";
 import DataTable from "components/table/DataTable";
 import { Card, CardBody } from "reactstrap";
 import { SearchInput } from "components/input/SearchInput";
-import { useGetProducts } from "api/shops_products";
-import { filterProductsBasedOnSearch } from "../common/utils/filters";
-import { AddButton } from "components/AddButton";
-import { history } from "../../../../history";
-
+import { useGetItems } from "api/items";
+import { filterItemsBasedOnSearch } from "../common/filters";
 import Select from "react-select";
-import useShopsOptions from "utility/selectionOptions/useShopsOptions";
-import { ProductTypeProvider, TYPE } from "../common/useProductType";
+import useCategoryOptions from "utility/selectionOptions/useCategoryOptions";
+import useVendorsOptions from "utility/selectionOptions/useVendorsOptions";
 
-import AuthComponent from "components/AuthComponent";
 
-const PageContent = () => {
+export default function ViewAllShopProductsPage() {
   const t = useTranslation();
 
+  const [category,setCategory]=React.useState("");
+  const [vendor,setVendor]=React.useState("");
+  
   //Table Content -- Data + Columns
-  const [selectedShop, setSelectedShop] = React.useState(null);
-  const { data, isLoading } = useGetProducts(selectedShop);
-  const products = data?.products || [];
+  const { data, isLoading } = useGetItems(vendor,category);
+  const products = data?data:  [];
   const columns = useTableColumns();
-
+  
   //Data Filters
   const [searchText, setSearchText] = React.useState("");
   const [filteredData, setFilteredData] = React.useState([]);
-  const shopsOptions = useShopsOptions();
+  const vendorsOptions=useVendorsOptions();
+  const categoriesOptions=useCategoryOptions({},vendor);
+
 
   React.useEffect(() => {
-    if (data && Array.isArray(data?.products)) {
-      const products = data.products;
+    if (data && Array.isArray(data)) {
+      const products = data;
       if (searchText) {
-        setFilteredData(filterProductsBasedOnSearch(products, searchText));
+        setFilteredData(filterItemsBasedOnSearch(products, searchText));
       } else {
         setFilteredData(products);
       }
@@ -42,27 +42,40 @@ const PageContent = () => {
 
   return (
     <>
-      <h1>{t("shops_products")}</h1>
+      <h1>{t("items")}</h1>
       <div className="d-flex align-items-center mb-1 justify-content-between flex-wrap">
-        <div className="d-flex">
-          <AuthComponent>
-            <AddButton onClick={() => history.push(`/shops-products/add`)} />
-          </AuthComponent>
-        </div>
+      <div style={{ width: "15rem" }} className="mr-1">
+           
+           <Select
+        
+             placeholder={t("vendors")}
+             options={vendorsOptions}
+             name="vendor_id"
+             onChange={(opt) => {
+               setVendor(opt.value ?? "");
+             }}
+           />
+           
+         </div>
+        <div style={{ width: "15rem" }} className="mr-1">
+        <Select
+        
+        placeholder={t("category")}
+        options={categoriesOptions}
+        name="category_id"
+        onChange={(opt) => {
+          setCategory(opt.value ?? "");
+        }}
+      />
+      
+    </div>
+
+        
         <div className="d-flex align-items-center">
-          <div style={{ width: "15rem" }} className="mr-1">
-            <Select
-              placeholder={t("shop")}
-              options={shopsOptions}
-              name="shop_id"
-              onChange={(opt) => {
-                setSelectedShop(opt.value);
-              }}
-            />
-          </div>
+
           <SearchInput
             onChange={setSearchText}
-            placeholder={t("_search.product")}
+            placeholder={t("_search.item")}
           />
         </div>
       </div>
@@ -76,11 +89,10 @@ const PageContent = () => {
             pagination
             noDataComponent={
               <h6 className="my-4">
-                {selectedShop !== null ? (
-                  <>{t("no_records")}</>
-                ) : (
-                  <>{t("please_select_a_shop")}</>
-                )}
+
+                <>{vendor?category? t("no_records"):t("please_select_a_category"):t("please_select_a_vendor")}</>
+
+
               </h6>
             }
           />
@@ -90,10 +102,3 @@ const PageContent = () => {
   );
 };
 
-export default function ViewAllShopProductsPage() {
-  return (
-    <ProductTypeProvider productType={TYPE.SHOP_PRODUCT}>
-      <PageContent />
-    </ProductTypeProvider>
-  );
-}

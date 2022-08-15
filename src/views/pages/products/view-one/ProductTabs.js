@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardBody, CardHeader } from 'reactstrap'
-import useProductTabs from '../utils/useProductTabs'
+import useProductTabs from '../common/utils/useProductTabs';
 import Tabs from "components/Tabs";
 import { useTranslation } from 'utility/language';
 

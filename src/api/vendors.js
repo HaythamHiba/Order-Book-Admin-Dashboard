@@ -3,7 +3,6 @@ import {
   useAddMutation,
   useUpdateMutation,
   useDeleteMutation,
-  useToggleStatus,
 } from "./helpers";
 
 const API = {
@@ -12,7 +11,7 @@ const API = {
   ADD: `/vendors/create`,
   UPDATE:(id)=> `/vendors/${id}/update`,
   DELETE: `/delete`,
-  UPDATE_STATUS: `/api/admin/shops/update_status`,
+  UPDATE_STATUS:(id)=> `/vendors/${id}/updateStatus`,
 };
 
 const KEY = "VENDORS";
@@ -21,8 +20,8 @@ export const useAddVendors = () => useAddMutation(KEY, API.ADD);
 export const useUpdateVendors = (vendor_id) => useUpdateMutation(KEY, API.UPDATE(vendor_id));
 export const useDeleteVendor = () =>
   useDeleteMutation(KEY, API.DELETE, "shop_id", "shops");
-export const useUpdateVendorStatus = () =>
-  useToggleStatus(KEY, API.UPDATE_STATUS, "shop_id", "shops");
+export const useUpdateVendorStatus = (id) =>
+useUpdateMutation(KEY, API.UPDATE_STATUS(id), "shop_id", "shops");
 
 export const useGetSingleVendor = (shop_id) =>
   useGetQuery(

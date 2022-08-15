@@ -12,6 +12,7 @@ export const getInitialValues = (objectToEdit = null) => {
       longitude:36.278336,
       latitude:33.510414,
       logo: "",
+
       
     };
   }
@@ -24,7 +25,8 @@ export const getInitialValues = (objectToEdit = null) => {
     },
     longitude:objectToEdit?.longitude || 36.278336,
     latitude:objectToEdit?.latitude || 33.510414,
-    logo: "",
+    logo: ""
+  
   };
 };
 
@@ -53,3 +55,20 @@ export const getDataToSend = (values) => {
   buildFormData(formData, data);
   return formData;
 };
+
+
+export const getStatusInitialValues = (objectToEdit = null) => {
+  if (!objectToEdit) {
+    return {
+      status:"",
+      admin_note:""
+      
+    };
+  }
+
+
+  return {
+    status:objectToEdit?.status || "",
+    admin_note:objectToEdit?.admin_note || ""
+};
+}

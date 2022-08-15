@@ -13,14 +13,10 @@ const HomePage = lazy(() => import("./views/pages/home/HomePage"));
 const ViewAllRestaurentProductsPage = lazy(() =>
   import("./views/pages/products/shops_products/ViewAllShopProductsPage")
 );
-const ViewOneRestaurantProductPage = lazy(() =>
-  import("./views/pages/products/shops_products/ViewOneShopProductPage")
-);
 
-const RestaurantsPage = lazy(() => import("./views/pages/restaurants/VendorsPage"));
-const RestaurantDetailsPage = lazy(() =>
-  import("./views/pages/shop-details/ShopDetailsPage")
-);
+
+const RestaurantsPage = lazy(() => import("./views/pages/vendors/VendorsPage"));
+
 
 const ViewAllOrders = lazy(() =>
   import("./views/pages/orders/view-all/Orders")
@@ -33,9 +29,11 @@ const ViewAccounts = lazy(() =>
   import("./views/pages/accounts/view/ViewPannel")
 );
 
-
-
-
+const vendorsCategories=lazy(()=>import("./views/pages/categories/CategoriesPage"))
+const VendorsSubCategories=lazy(()=>import("./views/pages/subcategories/SubCategoriesPage"))
+const ViewAllVendorItemsPage=lazy(()=>import("./views/pages/products/shops_products/ViewAllShopProductsPage"))
+const ViewOneVendorItemPage=lazy(()=>import("./views/pages/products/view-one/ViewOneProductPage"));
+const viewVendorImages=lazy(()=>import("./views/pages/images/ImagesPage"));
 
 const AddAccount = lazy(() => import("./views/pages/accounts/add/AddAdmin"));
 const EditAccount = lazy(() =>
@@ -129,21 +127,32 @@ class AppRouter extends React.Component {
             component={ViewAllRestaurentProductsPage}
             isPrivate
           />
-          <AppRoute
-            exact
-            path="/shops-products/view-one/:id/shop/:shop_id"
-            component={ViewOneRestaurantProductPage}
-            isPrivate
-          />
+
          
           <AppRoute exact path="/vendors" component={RestaurantsPage} isPrivate />
-     
+          <AppRoute exact path="/vendor_categories" component={vendorsCategories} isPrivate />
+          <AppRoute exact path="/vendor_subcategories" component={VendorsSubCategories} isPrivate />
+
           <AppRoute
             exact
-            path="/restaurant-details/:id"
-            component={RestaurantDetailsPage}
+            path="/vendor_items"
+            component={ViewAllVendorItemsPage}
             isPrivate
           />
+           
+          <AppRoute
+            exact
+            path="/vendor_items/:vendor_id/view-one/:id/category/:category_id"
+            component={ViewOneVendorItemPage}
+            isPrivate
+          />
+          <AppRoute
+            exact
+            path="/vendor/:vendor_id/images"
+            component={viewVendorImages}
+            isPrivate
+          />
+      
           
           <AppRoute
             exact

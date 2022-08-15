@@ -12,7 +12,7 @@ import {
   getValidationSchema,
   getDataToSend,
 } from "./formUtils";
-import useShopsOptions from "utility/selectionOptions/useShopsOptions";
+import useShopsOptions from "utility/selectionOptions/useVendorsOptions";
 import { useAddShopCategory } from "api/shopCategories";
 import { SelectField } from "components/input";
 

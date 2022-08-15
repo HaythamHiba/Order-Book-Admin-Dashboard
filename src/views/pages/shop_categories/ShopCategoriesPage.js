@@ -11,7 +11,7 @@ import AddCatModal from "./AddShopCatModal";
 import EditCatModal from "./EditShopCatModal";
 import { TableSpinner } from "views/components/TableSpinner";
 import { useIsAuthorized } from "redux/hooks/auth";
-import useShopsOptions from "utility/selectionOptions/useShopsOptions";
+import useShopsOptions from "utility/selectionOptions/useVendorsOptions";
 import Select from "react-select";
 import { useGetShopCategories } from "api/shopCategories";
 

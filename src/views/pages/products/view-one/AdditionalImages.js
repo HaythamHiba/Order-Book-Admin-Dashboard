@@ -1,22 +1,21 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardBody } from "reactstrap";
 import { useTranslation } from "utility/language";
-import AdditionalImagesForm from "../forms/AdditionalImagesForm";
+import AdditionalImagesForm from "../common/forms/AdditionalImagesForm";
 import { Formik, Form } from "formik";
 import { ExistingImage } from "./ExistingImage";
 import { LoadingButton } from "components/input/LoadingButton";
+import { useUpdateImages } from "api/products";
 import { buildFormData } from "api/helpers";
-import ProgressBar from "components/ProgressBar";
-import AuthComponent from "components/AuthComponent";
+import { useIsAuthorized } from "redux/hooks/auth";
 
-import { MAX_NUMBER_OF_PRODUCT_ADDITIONAL_IMAGES } from "configs/global";
-const maxNumber = MAX_NUMBER_OF_PRODUCT_ADDITIONAL_IMAGES;
-
-const AdditionalImages = ({ product, mutation }) => {
+const AdditionalImages = ({ product }) => {
   const t = useTranslation();
   const [deletedImages, setDeletedImages] = React.useState([]);
   const [images, setImages] = React.useState([]);
+  const mutation = useUpdateImages();
   const resetRef = React.useRef(null);
+  const isAuthorized = useIsAuthorized();
 
   React.useEffect(() => {
     if (mutation.isSuccess) {
@@ -70,47 +69,31 @@ const AdditionalImages = ({ product, mutation }) => {
           ))}
         </div>
         <hr />
-        <AuthComponent>
+        {isAuthorized && (
           <Formik
             onSubmit={handleSubmit}
             initialValues={{ product_additional_images: [] }}
           >
             {(formik) => (
               <Form>
-                {product.images.length < maxNumber && (
-                  <>
-                    <h4>{t("add_new_images")}</h4>
-                    <AdditionalImagesForm
-                      images={images}
-                      setImages={setImages}
-                    />
-                  </>
-                )}
-
+                <h4>{t("add_new_images")}</h4>
+                <AdditionalImagesForm images={images} setImages={setImages} />
                 <button
                   ref={resetRef}
                   type="reset"
                   style={{ display: "none" }}
                 ></button>
-                <ProgressBar
-                  value={mutation.percentCompleted}
+                <LoadingButton
+                  color="primary"
                   isLoading={mutation.isLoading}
-                  isError={mutation.isError}
-                  isSuccess={mutation.isSuccess}
-                />
-                <div className="d-flex justify-content-center align-items-center">
-                  <LoadingButton
-                    type="submit"
-                    color="primary"
-                    isLoading={mutation.isLoading}
-                  >
-                    {t("save")}
-                  </LoadingButton>
-                </div>
+                  type="submit"
+                >
+                  {t("save")}
+                </LoadingButton>
               </Form>
             )}
           </Formik>
-        </AuthComponent>
+        )}
       </CardBody>
     </Card>
   );

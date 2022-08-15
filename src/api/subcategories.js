@@ -1,24 +1,18 @@
 import {
   useGetQuery,
-  useAddMutation,
+  
   useUpdateMutation,
-  useDeleteMutation,
-  useToggleStatus,
+
 } from "./helpers";
 
 const API = {
-  GET: `/api/admin/subcategories`,
-  ADD: `/api/admin/subcategories/add`,
-  UPDATE: `/api/admin/subcategories/update`,
-  DELETE: `/api/admin/subcategories/delete`,
-  UPDATE_STATUS: `/api/admin/subcategories/update_subcategory_status`,
+  GET:(vendor_id)=> `/vendors/${vendor_id}/categories`,
+
+  UPDATE:(vendor_id,category_id)=> `/vendors/${vendor_id}/categories/${category_id}/updateStatus`,
 };
 
-const KEY = "SUBCATEGORIES";
-export const useGetSubCategories = () => useGetQuery(KEY, API.GET);
-export const useAddSubCategory = () => useAddMutation(KEY, API.ADD);
-export const useUpdateSubCategory = () => useUpdateMutation(KEY, API.UPDATE);
-export const useDeleteSubCategory = () =>
-  useDeleteMutation(KEY, API.DELETE, "subcategory_id", "subcategories");
-export const useUpdateSubCategoryStatus = () =>
-  useToggleStatus(KEY, API.UPDATE_STATUS, "subcategory_id", "subcategories");
+const KEY = "CATEGORIES";
+export const useGetSubCategories = (vendor_id,category_id) => useGetQuery(KEY, API.GET(vendor_id),{parent_id:category_id},{enabled:!!vendor_id&&!!category_id});
+
+export const useUpdateSubCategory = (vendor_id,category_id) => useUpdateMutation(KEY, API.UPDATE(vendor_id,category_id));
+

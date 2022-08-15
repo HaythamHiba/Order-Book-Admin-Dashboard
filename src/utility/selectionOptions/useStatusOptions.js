@@ -3,28 +3,17 @@ import { useTranslation } from "utility/language"
 export const useStatusOptions = () => {
     const t = useTranslation();
     let options = [{
-        value: null,
+        value: "",
         label: t("all")
     },
     {
-        value: "pending",
-        label: t("pending")
+        value: true,
+        label: t("active")
     },
     {
-        value: "delivering",
-        label: t("delivering")
+        value: false,
+        label: t("inactive")
     },
-    {
-        value: "delivered",
-        label: t("delivered")
-    },
-    {
-        value: "canceled",
-        label: t("canceled")
-    },
-    {
-        value: "accepted",
-        label: t("accepted")
-    }];
+   ];
     return options;
 }

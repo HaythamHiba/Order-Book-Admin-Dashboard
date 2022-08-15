@@ -10,22 +10,20 @@ const SingleLanguage = ({ langID, langCode }) => {
   return (
     <>
       <ValidatedField
-        name={`translated_fields[${langID}][product_name]`}
-        label={t("product_name") + lang}
-        placeholder={t("product_name") + lang}
+        name={`name[${langCode}]`}
+        label={t("item_name") + lang}
+        placeholder={t("item_name") + lang}
         isRequired
+        readOnly
       />
       <ValidatedField
-        name={`translated_fields[${langID}][product_note]`}
-        label={t("product_note") + lang}
-        placeholder={t("product_note") + lang}
-      />
-      <ValidatedField
-        name={`translated_fields[${langID}][product_mobile_description]`}
-        label={t("product_mobile_description") + lang}
-        placeholder={t("product_mobile_description") + lang}
+        name={`description[${langCode}]`}
+        label={t("item_description") + lang}
+        placeholder={t("item_description") + lang}
         as="textarea"
+        readOnly
       />
+
     </>
   );
 };
@@ -34,10 +32,10 @@ const LanguageBasedForm = () => {
   return (
     <Row xs={1} sm={1} md={1} lg={2} xl={2}>
       <Col dir="ltr">
-        <SingleLanguage langID={1} langCode="en" />
+        <SingleLanguage langID={0} langCode="en" />
       </Col>
       <Col dir="rtl">
-        <SingleLanguage langID={2} langCode="ar" />
+        <SingleLanguage langID={1} langCode="ar" />
       </Col>
     </Row>
   );
