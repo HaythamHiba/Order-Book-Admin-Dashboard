@@ -4,9 +4,9 @@ import { getLanguageAttr } from "helpers/language";
 import { useGetSubCategories } from "api/subcategories";
 import { useTranslation } from "utility/language";
 
-const useSubCategoryOptions = ({ withAllOption = false } = {}) => {
+const useSubCategoryOptions = ({ withAllOption = false } = {},vendor_id,category_id) => {
   const languageCode = useBackendLanguageCode();
-  const { data } = useGetSubCategories();
+  const { data } = useGetSubCategories(vendor_id,category_id);
   const t = useTranslation();
 
   return React.useMemo(() => {

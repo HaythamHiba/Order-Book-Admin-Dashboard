@@ -18,6 +18,7 @@ export const getInitialValues = ( objectToEdit = null) => {
       image:"",
       category_id:"",
       sub_category_id:"",
+      vendor_id:"",
       price:"",
       admin_note:"",
       status:true,
@@ -38,6 +39,9 @@ export const getInitialValues = ( objectToEdit = null) => {
     category_id:objectToEdit?.category_id || "",
     sub_category_id:objectToEdit?.sub_category_id || "",
     price:objectToEdit?.price || 0,
+    vendor_id:objectToEdit?.vendor_id || "",
+
+
 
 
     image: "",
@@ -70,7 +74,7 @@ export const getValidationSchema = ( editMode = false) =>
  
     delete data["image"];
     delete data["sub_category_id"]
-    delete data["sub_category_id"]
+    delete data["category_id"]
     delete data["name"]
     delete data["description"];
     delete data["price"];

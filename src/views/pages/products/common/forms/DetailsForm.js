@@ -18,8 +18,8 @@ const DetailsForm = ({ editMode = false }) => {
   const { preview, handleImageChange } = useImagePreview(
     formik.values.image_preview || null
   );
-  const categoriesOptions=useCategoryOptions();
-  const subcategoriesOptions=useSubCategoryOptions(false,formik.values.category_id);
+  const categoriesOptions=useCategoryOptions(false,formik.values.vendor_id);
+  const subcategoriesOptions=useSubCategoryOptions(false,formik.values.vendor_id,formik.values.category_id);
 
 
   return (

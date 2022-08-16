@@ -330,6 +330,7 @@
   "edit_vendor": "Edit Vendor",
   "vendor_name": "Vendor Name", 
   "vendor_items":"Vendor Items",
+  "item_details":"Item Details",
   "vendor_description": "Vendor Description",
   "vendor_mobile_description": "Vendor Mobile Description",
   "vendor_image": "Vendor Image",

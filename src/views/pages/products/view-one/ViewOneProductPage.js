@@ -12,6 +12,7 @@ import ProductDetails from "./ProductDetails";
 const ViewOneProductPage = () => {
   const t = useTranslation();
   const { id,category_id,vendor_id } = useParams();
+  
   const { data, isLoading } = useGetSingleItem(vendor_id,category_id,id);
 
 

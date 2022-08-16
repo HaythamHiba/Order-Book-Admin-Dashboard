@@ -238,6 +238,7 @@
   "password_must_match": "كلمة السر يجب ان تتطابق",
   "gallery": "المعرض",
   "add_gallery_item": "إضافة عنصر للمعرض",
+  "item_details":"تفاصيل العنصر",
   "update_gallery_item": "التعديل على عنصر في المعرض",
   "social_media": "وسائل التواصل الاجتماعية",
   "add_social_media": "إضافة وسيلة تواصل إجتماعية",

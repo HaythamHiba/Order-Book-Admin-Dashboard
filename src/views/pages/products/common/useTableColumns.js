@@ -13,7 +13,7 @@ const navigateToDetails = (row) => {
     const category_id=row?.sub_category_id || row.category_id;
     const vendor_id=row.vendor_id
 
-    history.push(`/vendor_items/${vendor_id}/items/view-one/${item_id}/category/${category_id}`);
+    history.push(`/vendor_items/${vendor_id}/view-one/${item_id}/category/${category_id}`);
   
 };
 

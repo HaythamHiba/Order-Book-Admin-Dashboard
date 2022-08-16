@@ -14,29 +14,25 @@ import { Badge } from "reactstrap";
 
 
 import { useUpdateDetailsMutation } from "api/items";
-import { buildFormData } from "api/helpers";
-import { history } from "../../../../history";
-import { useIsAuthorized } from "redux/hooks/auth";
+
 
 const ProductDetails = ({ product }) => {
   const t = useTranslation();
   const tabs = useFormTabs(true);
-  const updateDetailsMutation = useUpdateDetailsMutation(product?.id);
+  let id=product.category_id;
+  if(product.sub_category_id){
+    id=product.sub_category_id
+  }
+  const updateDetailsMutation = useUpdateDetailsMutation(product?.vendor_id,id,product?.id);
  
-  const isAuthorized = useIsAuthorized();
+ 
 
-  React.useEffect(() => {
-    if ( updateDetailsMutation.isSuccess) {
-      history.replace(`/items/view-all`);
-    }
-  }, [updateDetailsMutation.isSuccess]);
-
+  
 
   const handleSubmit = (values) => {
     const dataToSend=getDataToSend(values);
-    const formData = new FormData();
-    buildFormData(formData, { ...dataToSend });
-    updateDetailsMutation.mutate(formData);
+    
+    updateDetailsMutation.mutate(dataToSend);
   };
 
   return (
@@ -63,7 +59,7 @@ const ProductDetails = ({ product }) => {
             <Form>
               <Tabs tabs={tabs} />
               <div  className="d-flex   align-items-center  justify-content-between   m-1" style={{ gap: "20px" }}>
-              {isAuthorized && (
+           
                 <LoadingButton
                   type="submit"
                   color="primary"
@@ -71,7 +67,7 @@ const ProductDetails = ({ product }) => {
                 >
                   {t("save")}
                 </LoadingButton>
-              )}
+            
           
 
               </div>
