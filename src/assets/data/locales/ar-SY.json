@@ -328,7 +328,18 @@
   "vendor_description": "وصف الوكيل",
   "vendor_mobile_description": "وصف الوكيل الخاص بالموبايل",
   "vendor_image": "صورة الوكيل",
-  "test2":"تيست",
+  "vendor_maps":"مخططات الوكيل",
+  "vendor_offers":"عروض الوكلاء" ,
+  "please_selcet_vandor_and_map":"اختر وكيل و خريطة اولاّّ",
+  "blocked":"محظور",
+  "un_blocked":"غير محظور",
+  "maps":"الخرائط",
+
+  "max_number":"العدد الأقصى",
+  "min_number":"العدد الأدنى",
+  "table":"الطاولة",
+
+
 
   "auctions":"المزادات",
   "edit_auction":"التعديل على المزاد",

@@ -61,14 +61,7 @@ const CategoryForm = ({ preview, editMode = false }) => {
    
       </Col>
       <Col>
-        <ValidatedField
-          id="image"
-          type="file"
-          label={t("category_image")}
-          name="image"
-          accept="image/*"
-          readOnly
-        />
+
         <ImagePreview preview={preview} />
       </Col>
     </Row>

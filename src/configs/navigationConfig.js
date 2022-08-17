@@ -5,16 +5,16 @@ import { Home } from "react-feather";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PeopleIcon from "@mui/icons-material/People";
 
-import ReceiptIcon from "@mui/icons-material/Receipt";
 
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { BiCategory } from "react-icons/bi";
 
 import {  MdOutlineCategory } from "react-icons/md";
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 
 import { SUPER_ADMIN } from "./Roles";
 import NoFoodIcon from '@mui/icons-material/NoFood';
-
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 const navigationConfig = [
   {
     id: "home",
@@ -61,16 +61,25 @@ const navigationConfig = [
         navLink: "/vendor_items",
         
       },
+      {
+        id: "vendor_offers",
+        title: "vendor_offers",
+        type: "item",
+        icon: <LocalOfferIcon size={20} />,
+        navLink: "/vendor_offers",
+        
+      },
+      {
+        id: "vendor_maps",
+        title: "vendor_maps",
+        type: "item",
+        icon: <TableRestaurantIcon size={20}/>,
+        navLink: "/vendor/maps",
+        
+      },
 
     
     ]
-  },
-  {
-    id: "orders",
-    title: "orders",
-    type: "item",
-    icon: <ReceiptIcon size={20} />,
-    navLink: "/all-orders",
   },
  
   {

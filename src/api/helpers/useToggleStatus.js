@@ -10,15 +10,15 @@ export const useToggleStatus = (key, url, object_id, dataName) => {
   const t = useTranslation();
 
   return useMutation(
-    async ({ id, new_status }) => {
-      const { data } = await axios.post(url, {
+    async ({ id, status }) => {
+      const { data } = await axios.post(`${url}/${id}/updateBlockStatus`, {
         [object_id]: id,
-        new_status,
+        status,
       });
-      return { ...data, id, new_status };
+      return { ...data, id, status };
     },
     {
-      onSuccess: ({ message, id, new_status }) => {
+      onSuccess: ({ message, id, status }) => {
         toast.success(message || t("toggle_success"));
 
         queryClient.invalidateQueries([key]);

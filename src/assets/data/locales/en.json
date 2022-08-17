@@ -334,6 +334,18 @@
   "vendor_description": "Vendor Description",
   "vendor_mobile_description": "Vendor Mobile Description",
   "vendor_image": "Vendor Image",
+  "vendor_maps":"Vendor Maps",
+  "vendor_offers":"Vendor Offers",
+  "please_selcet_vandor_and_map":"Select Vendor And Map First",
+
+  "blocked":"Blocked",
+  "un_blocked":"Un Blocked",
+
+
+  "max_number":"Max Number",
+  "min_number":"Min Number",
+  "maps":"Maps",
+  "table":"Table",
 
   "vendor_category_name":"Vendor Category Name",
   "please_select_vendor_first":"Please Select vendor First",

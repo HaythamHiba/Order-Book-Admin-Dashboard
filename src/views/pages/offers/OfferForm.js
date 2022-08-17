@@ -7,7 +7,7 @@ import { Row, Col } from "reactstrap";
 import { Check } from "react-feather";
 import Checkbox from "components/@vuexy/checkbox/CheckboxesVuexy";
 
-const SubCategoryForm = ({ preview, editMode = false }) => {
+const OfferForm = ({ preview, editMode = false }) => {
   const t = useTranslation();
   const formik = useFormikContext();
 
@@ -61,11 +61,11 @@ const SubCategoryForm = ({ preview, editMode = false }) => {
    
       </Col>
       <Col>
-
+  
         <ImagePreview preview={preview} />
       </Col>
     </Row>
   );
 };
 
-export default SubCategoryForm;
+export default OfferForm;

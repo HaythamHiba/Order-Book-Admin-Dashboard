@@ -15,7 +15,7 @@ import useSubCategoryOptions from "utility/selectionOptions/useSubCategoryOption
 const DetailsForm = ({ editMode = false }) => {
   const t = useTranslation();
   const formik = useFormikContext();
-  const { preview, handleImageChange } = useImagePreview(
+  const { preview } = useImagePreview(
     formik.values.image_preview || null
   );
   const categoriesOptions=useCategoryOptions(false,formik.values.vendor_id);
@@ -86,19 +86,7 @@ const DetailsForm = ({ editMode = false }) => {
     
         
         <Col lg={5} xl={5}>
-          <ValidatedField
-            id="image"
-            type="file"
-            label={t("item_main_image")}
-            name="image"
-            accept="image/*"
-            onChange={(e) => {
-              handleImageChange(e);
-              formik.setFieldValue("image", e.target.files[0]);
-            }}
-            isRequired={editMode ? false : true}
-            readOnly
-          />
+
           <ImagePreview height={300} preview={preview} />
         </Col>
       </Row>

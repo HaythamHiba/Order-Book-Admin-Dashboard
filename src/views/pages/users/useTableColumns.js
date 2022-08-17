@@ -1,82 +1,43 @@
+import { useUpdateUser } from "api/users";
+import { ToggleStatus } from "components/ToggleStatus";
 import React, { useMemo } from "react";
 import { useTranslation } from "utility/language";
-import { useDeleteUser } from "api/users";
-import Actions from "components/table/TableActions";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { GoVerified } from "react-icons/go";
 
-const useTableColumns = ({
-  setEditModal,
-  setObjectToEdit,
-  setEditPasswordModal,
-}) => {
+
+const useTableColumns = () => {
   const t = useTranslation();
-  const deleteMutation = useDeleteUser();
+  const toggleMutation=useUpdateUser();
+ 
 
   return useMemo(
     () => [
-      {
-        name: "",
-        selector: "is_verified",
-        sortable: false,
-        center: true,
-        cell: (row) => (
-          <>
-            {row.is_verified ? (
-              <GoVerified style={{ color: "#0894D7" }} size={20} />
-            ) : (
-              "-"
-            )}
-          </>
-        ),
-        width: "50px",
-      },
+     
       {
         name: t("name"),
-        selector: "full_name",
+        selector: "name",
         sortable: true,
         center: true,
-        cell: (row) => <>{row.full_name}</>,
-      },
-      {
-        name: t("email"),
-        selector: "email",
-        sortable: true,
-        center: true,
-        cell: (row) => <>{row.email}</>,
+        cell: (row) => <>{row.name}</>,
       },
       {
         name: t("phone"),
-        selector: "phone",
+        selector: "phone_number",
         sortable: true,
         center: true,
-        cell: (row) => <div dir="ltr">{row.phone}</div>,
+        cell: (row) => <>{row.phone_number}</>,
       },
       {
-        name: "#",
-        sortable: false,
+        name: t("blocked"),
+      
+        sortable: true,
         center: true,
-        cell: (row) => (
-          <Actions
-            onEdit={() => {
-              setEditModal(true);
-              setObjectToEdit(row);
-            }}
-            onDelete={() => deleteMutation.mutate({ id: row.id })}
-          >
-            <RiLockPasswordFill
-              onClick={() => {
-                setEditPasswordModal(true);
-                setObjectToEdit(row);
-              }}
-              className="cursor-pointer ml-1"
-              size={22}
-            />
-          </Actions>
-        ),
+        cell: (row) => <><ToggleStatus object={row} toggleMutation={toggleMutation} /> </>,
       },
+    
+    
+      
     ],
-    [t, deleteMutation, setEditModal, setEditPasswordModal, setObjectToEdit]
+    [t,toggleMutation]
   );
 };
 

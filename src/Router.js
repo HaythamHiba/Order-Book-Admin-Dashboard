@@ -18,27 +18,15 @@ const ViewAllRestaurentProductsPage = lazy(() =>
 const RestaurantsPage = lazy(() => import("./views/pages/vendors/VendorsPage"));
 
 
-const ViewAllOrders = lazy(() =>
-  import("./views/pages/orders/view-all/Orders")
-);
-const ViewOneOrderPage = lazy(() =>
-  import("./views/pages/orders/view-one/Order")
-);
-
-const ViewAccounts = lazy(() =>
-  import("./views/pages/accounts/view/ViewPannel")
-);
 
 const vendorsCategories=lazy(()=>import("./views/pages/categories/CategoriesPage"))
 const VendorsSubCategories=lazy(()=>import("./views/pages/subcategories/SubCategoriesPage"))
 const ViewAllVendorItemsPage=lazy(()=>import("./views/pages/products/shops_products/ViewAllShopProductsPage"))
 const ViewOneVendorItemPage=lazy(()=>import("./views/pages/products/view-one/ViewOneProductPage"));
 const viewVendorImages=lazy(()=>import("./views/pages/images/ImagesPage"));
+const ViewVendorMapsPage=lazy(()=>import("./views/pages/oneTable/OneTableChartPage"))
+const ViewOffersPage=lazy(()=>import("./views/pages/offers/OffersPage"))
 
-const AddAccount = lazy(() => import("./views/pages/accounts/add/AddAdmin"));
-const EditAccount = lazy(() =>
-  import("./views/pages/accounts/edit/EditAccount")
-);
 const UsersPage = lazy(() => import("./views/pages/users/UsersPage"));
 
 // Route-based code splitting
@@ -107,19 +95,7 @@ class AppRouter extends React.Component {
         <Switch>
           <AppRoute exact path="/" component={HomePage} isPrivate />
          
-          <AppRoute
-            isPrivate
-            exact
-            component={ViewAllOrders}
-            path="/all-orders"
-          />
-         
-          <AppRoute
-            isPrivate
-            exact
-            component={ViewOneOrderPage}
-            path="/order/:id"
-          />
+      
          
           <AppRoute
             exact
@@ -152,28 +128,23 @@ class AppRouter extends React.Component {
             component={viewVendorImages}
             isPrivate
           />
+           <AppRoute
+            exact
+            path="/vendor/maps"
+            component={ViewVendorMapsPage}
+            isPrivate
+          />
+           <AppRoute
+            exact
+            path="/vendor_offers"
+            component={ViewOffersPage}
+            isPrivate
+          />
       
-          
-          <AppRoute
-            exact
-            path="/accounts/view"
-            component={ViewAccounts}
-            isPrivate
-          />
-          <AppRoute
-            exact
-            path="/accounts/edit"
-            component={EditAccount}
-            isPrivate
-          />
+      
           <AppRoute exact path="/users" component={UsersPage} isPrivate />
 
-          <AppRoute
-            exact
-            path="/accounts/add"
-            component={AddAccount}
-            isPrivate
-          />
+        
           <AppRoute path="/login" component={login} fullLayout />
           <AppRoute
             path="/misc/not-authorized"

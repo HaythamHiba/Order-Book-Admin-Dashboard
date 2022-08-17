@@ -1,16 +1,12 @@
-import { useGetQuery, useDeleteMutation, useUpdateMutation } from "./helpers";
+import { useGetQuery, useToggleStatus } from "./helpers";
 
 const API = {
-  GET_USERS: `/api/admin/users`,
-  UPDATE: `/api/admin/user/update`,
-  UPDATE_PASSWORD: `/api/admin/user/update_password`,
-  DELETE: `/api/admin/user/delete`,
+  GET_USERS: `/users`,
+  UPDATE: `/users`,
+
 };
 
 const KEY = "USERS";
 export const useGetUsers = (params) => useGetQuery(KEY, API.GET_USERS, params);
-export const useUpdateUser = () => useUpdateMutation(KEY, API.UPDATE);
-export const useUpdateUserPassword = () =>
-  useUpdateMutation(KEY, API.UPDATE_PASSWORD);
-export const useDeleteUser = () =>
-  useDeleteMutation(KEY, API.DELETE, "user_id");
+export const useUpdateUser = () => useToggleStatus(KEY, API.UPDATE,'status');
+
