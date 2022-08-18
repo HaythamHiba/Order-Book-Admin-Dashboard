@@ -121,6 +121,7 @@ export default function OneTableChartPage() {
              name="vendor_id"
              onChange={(opt) => {
                setSelectedVendor(opt.value ?? "");
+               setSelectedMap("")
              }}
            />
            
