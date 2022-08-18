@@ -454,10 +454,11 @@
   },
 
   "_active": {
-    "products_count": "المنتجات المفعلة",
+    "items_count": "المنتجات المفعلة",
     "orders_count": "الطلبات",
     "categories_count": "الأقسام الرئيسية المفعلة",
-    "vendors_count": "المتاجر"
+    "subcategories_count":"الأقسام الفرعية الفعالة",
+    "vendors_count": "الوكلاء الفعالة"
   },
 
   "_search": {

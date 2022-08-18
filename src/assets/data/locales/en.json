@@ -460,10 +460,11 @@
   },
 
   "_active": {
-    "products_count": "Acivte Products",
+    "items_count": "Acivte Products",
     "orders_count": "Orders",
     "categories_count": "Active Categories",
-    "vendors_count": "vendors"
+    "subcategories_count":"Active Sub Categories",
+    "vendors_count": " Active Vendors"
   },
 
   "_search": {

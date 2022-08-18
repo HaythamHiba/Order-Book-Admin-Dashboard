@@ -5,7 +5,7 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import { useTranslation } from 'utility/language';
 import useTableColumns from './useTableColumns';
 import { history } from '../../../../history'
-export default function LatestOrdersTable({ latest_Orders }) {
+export default function   LatestOrdersTable({ latest_Orders }) {
   const columns = useTableColumns();
   const t = useTranslation();
   return (
